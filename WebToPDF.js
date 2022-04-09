@@ -2,7 +2,12 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 
-async function createPDf(pathOrLink, pdfName, pdfFormat, background) {
+exports.createPDf = async function createPDf(
+  pathOrLink,
+  pdfName,
+  pdfFormat,
+  background
+) {
   try {
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -13,7 +18,6 @@ async function createPDf(pathOrLink, pdfName, pdfFormat, background) {
       waitUntil: "networkidle0",
       timeout: 10000,
     });
-
 
     await page.pdf({
       path: pdfName, //string
@@ -27,4 +31,4 @@ async function createPDf(pathOrLink, pdfName, pdfFormat, background) {
   } catch (err) {
     throw err;
   }
-}
+};
